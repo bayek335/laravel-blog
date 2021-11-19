@@ -1,0 +1,20 @@
+span .custom-dropdown {
+    position: relative;
+}
+.custom-dropdown span {
+    cursor: pointer;
+}
+.custom-dropdown .dropdown-menu {
+    display: none;
+    transition: 3s ease;
+}
+.custom-dropdown:hover .dropdown-menu {
+    background-color: white;
+    display: inline-block;
+    position: absolute;
+    z-index: 4;
+    border: none;
+}
+.dropdown-menu a.dropdown-item {
+    color: black;
+}
