@@ -34,11 +34,17 @@
                     </span>
 
                 </div>
+                @guest
                 <div class="navbar-nav w-100 d-flex justify-content-end">
                     <a class="nav-item text-white btn btn-sm btn-link" href="/register">Register</a>
                     <span class="mx-2"></span>
                     <a class="nav-item btn btn-sm btn-warning" href="/login">Log in</a>
                 </div>
+                @else
+                <div class="navbar-nav w-100 d-flex justify-content-end">
+                    <a class="nav-item btn btn-sm btn-danger" href="/logout">Log out</a>
+                </div>
+                @endguest
             </div>
         </div>
     </nav>

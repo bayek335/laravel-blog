@@ -10,7 +10,7 @@
             <div class="form">
                 <div class="form-group mb-3">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="username" name="name" autofocus required>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="username" name="name" autofocus required autocomplete="off">
                     @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required autocomplete="off">
                     @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="off">
                     @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}

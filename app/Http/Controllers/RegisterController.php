@@ -5,38 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class RegisterController extends Controller
 {
-
     protected $user;
 
     public function __construct()
     {
         $this->user = new User();
     }
-
-    public function login()
-    {
-        return view('auth.login');
-    }
-
-    public function loginHandler(Request $request)
-    {
-        $user = $this->user->where('email', $request->email)->first();
-        if ($user) {
-            if (password_verify($request->password, $user->password)) {
-                return redirect()->to('/dashboard');
-            }
-        }
-        session()->flash('fail', 'Login failed, check your email or password!');
-        return back();
-    }
-
-    public function register()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         return view('auth.register');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
 
