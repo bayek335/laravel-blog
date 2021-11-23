@@ -7,11 +7,12 @@
 </div>
 
 <div class="col-lg-8">
-    <form action="/dashboard/posts" method="POST" enctype="multipart/form-data">
+    <form action="/dashboard/posts/{{$post->slug}}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="form-group mb-3">
             <label for="title">Title</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror " name="title" id="title">
+            <input type="text" class="form-control @error('title') is-invalid @enderror " name="title" id="title" value="@if(old('title')) {{old('title')}} @else {{$post->title}} @endif">
             @error('title')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -20,13 +21,13 @@
         </div>
         <div class="form-group mb-3">
             <label for="slug">Slug</label>
-            <input type="text" class="form-control" name="slug" id="slug" disabled>
+            <input type="text" class="form-control" name="slug" id="slug" disabled value="{{$post->slug}}">
         </div>
         <div class="form-group mb-3">
             <label for="category">Category</label>
             <select class="form-select @error('category') is-invalid @enderror" name="category" id="category">
                 @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->category_name}}</option>
+                <option @if($category->id === $post->category_id) {{ 'selected' }} @endif value="{{$category->id}}">{{$category->category_name}}</option>
                 @endforeach
             </select>
             @error('category')
@@ -35,9 +36,17 @@
             </div>
             @enderror
         </div>
+
         <div class="form-group mb-3">
             <label class="form-label" for="image">Post Image</label>
-            <img src="" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
+            <input type="hidden" name="oldimage" value="{{$post->image}}">
+            <div class="col-6">
+                @if($post->image)
+                <img src="{{asset('storage/'.$post->image)}}" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
+                @else
+                <img src="" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
+                @endif
+            </div>
             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" onchange="previewImage()">
             @error('image')
             <div class="invalid-feedback">
@@ -47,7 +56,7 @@
         </div>
         <div class="from-group mb-3">
             <label for="body">Description</label>
-            <input id="body" type="hidden" name="body">
+            <input id="body" type="hidden" name="body" value="@if(old('body')) {{old('body')}} @else {{$post->body}} @endif">
             <trix-editor input="body"></trix-editor>
             @error('body')
             <small class="text-danger fw-normal">
@@ -84,14 +93,12 @@
         const imgPreview = document.querySelector('#imgPreview');
 
         imgPreview.style.display = 'block';
-        imgPreview.style.width = '50%';
 
         const ofReader = new FileReader
         ofReader.readAsDataURL(image.files[0])
         ofReader.onload = function(oFREvent) {
             imgPreview.src = oFREvent.target.result
         }
-
     }
 </script>
 

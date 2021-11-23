@@ -13,7 +13,7 @@ class Post extends Model
 
 
 
-    protected $prymaryKey = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['title', 'excerpt', 'slug', 'body', 'published_at'];
 

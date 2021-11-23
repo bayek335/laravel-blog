@@ -16,7 +16,7 @@
                 @if(request('writer'))
                 <input type="hidden" name="writer" value="{{request('writer')}}">
                 @endif
-                <input type="text" class="form-control" placeholder="Search posts" name="search">
+                <input type="text" class="form-control" placeholder="Search posts" name="search" value="@if(request('search')) {{ request('search') }} @endif">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
@@ -24,7 +24,7 @@
         </form>
     </div>
 </div>
-@if($posts->count()<1) <div class="row text-center">
+@if($posts->count()<=0) <div class="row text-center">
     <div class="col-md-7 m-auto">
         <h3>No Posts Found!</h3>
     </div>

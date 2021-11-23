@@ -19,6 +19,7 @@
     </div>
 </div>
 <div class="row px-2 justify-content-between mt-3">
+    @if($posts->count()>0)
     <div class="col-12 mr-1 mt-3 shadow-sm text-center">
         <div class="card">
             <img src="..." class="card-img-top bg-secondary" alt="..." style="width:100%;height:140px">
@@ -31,6 +32,14 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="row text-center">
+        <div class="col-md-7 m-auto">
+            <h3>No Posts!</h3>
+        </div>
+    </div>
+    @endif
+
     @foreach($posts->skip(1) as $post)
     <div class="col-lg-4 mr-1 mt-3 shadow-sm">
         <div class="card">

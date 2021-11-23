@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\DashboardCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/dashboard/posts/create/getSlug', [DashboardPostController::class, 'getSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::get('/dashboard/category/create/getslug', [DashboardCategoryController::class, 'getSlug'])->middleware('auth');
+Route::resource('/dashboard/category', DashboardCategoryController::class)->except('show')->middleware('is_admin');
+
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show');

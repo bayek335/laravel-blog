@@ -5,7 +5,7 @@
 <div class="row py-5">
     <div class="col-md-6 m-auto bg-light shadow-sm p-4">
         <h4 class="text-center">Register</h4>
-        <form action="" method="POST">
+        <form action="/register" method="POST">
             @csrf
             <div class="form">
                 <div class="form-group mb-3">

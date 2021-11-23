@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             Categories::class,
         ]);
-        User::factory(3)->create();
-        Post::factory(10)->create();
+        // User::factory(3)->create();
+        // Post::factory(10)->create();
     }
 }

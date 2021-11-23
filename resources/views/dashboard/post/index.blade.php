@@ -26,6 +26,7 @@
                 <th scope="col">No</th>
                 <th scope="col">Title</th>
                 <th scope="col">Category</th>
+                <th scope="col">Description</th>
                 <th scope="col" class="text-center">Action</th>
             </tr>
         </thead>
@@ -35,13 +36,14 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->category->category_name }}</td>
+                <td class="w-50">{{ $post->excerpt }} ....</td>
                 <td class="">
                     <a class="text-decoration-none mr-2 badge bg-info" href="/dashboard/posts/{{ $post->slug }}" class="text-center"> <span data-feather='eye'></span> <small>show</small></a>
                     <a class="text-decoration-none mr-2 badge bg-warning" href="/dashboard/posts/{{ $post->slug }}/edit" class="text-center"> <span data-feather='edit'></span> <small>edit</small></a>
                     <form action="/dashboard/posts/{{ $post->slug }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn text-decoration-none mr-2 badge bg-danger" href="" class="text-center"> <span data-feather='x-circle'></span> <small>delete</small></button>
+                        <button id="btn-delete" onclick="return confirm('Are you sure to delete this post?')" type="submit" class="btn text-decoration-none mr-2 badge bg-danger" href="" class="text-center"> <span data-feather='x-circle'></span> <small>delete</small></button>
                     </form>
                 </td>
             </tr>
