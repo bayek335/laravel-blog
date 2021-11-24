@@ -16,8 +16,8 @@
                     </button>
                 </form>
             </div>
-            <div class="card-header bg-secondary mt-3">
-                <img src="{{asset('storage/'.$post->image)}}" alt="" style="height: 25vw;width:100%">
+            <div class="card-header bg-white mt-3">
+                <img src="{{asset('images/post-images/'.$post->image)}}" alt="" class="border" style="height: 25vw;width:100%">
             </div>
             <div class="card-body">
                 <p>Post by : {{$post->user->name}}</p>

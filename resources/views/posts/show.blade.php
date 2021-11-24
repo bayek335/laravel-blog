@@ -11,8 +11,8 @@
                     <p class="m-0">Writed by <a class="text-decoration-none" href="/post?writer={{ $post->user->name }}">{{ $post->user->name }}</a> in <a class="text-decoration-none" href="/post?category={{ $post->category->slug }}">{{ $post->category->category_name }}</a> {{ $post->created_at->diffForHumans() }} </p>
                 </small>
             </div>
-            <div class="card-header bg-secondary">
-                <img src="" alt="" style="height: 25vw;width:100%">
+            <div class="card-header border-bottom">
+                <img src="{{ asset('images/post-images/'.$post->image) }}" alt="" class="w-100">
             </div>
             <div class="card-body">
                 <p class="card-text mt-3">{!! $post->body !!}</p>

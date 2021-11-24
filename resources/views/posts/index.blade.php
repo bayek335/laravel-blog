@@ -34,7 +34,7 @@
         @foreach($posts as $post)
         <div class="col-lg-4 mt-3 ">
             <div class="card shadow-sm">
-                <img src="..." class="card-img-top bg-secondary" alt="..." style="width:100%;height:140px">
+                <img src="{{ asset('images/post-images/'.$post->image) }}" class="card-img-top bg-secondary" alt="...">
                 <div class="card-body"><small>
                         <p class="m-0">Writed by <a class="text-decoration-none" href="/post?writer={{ $post->user->name }}">{{ $post->user->name }}</a> in <a class="text-decoration-none" href="/post?category={{ $post->category->slug }}">{{ $post->category->category_name }}</a> </p>
                     </small>

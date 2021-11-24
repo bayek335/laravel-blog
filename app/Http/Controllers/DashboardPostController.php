@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
@@ -17,7 +18,7 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(15);
+        $posts = Post::where('user_id', auth()->user()->id)->latest()->paginate(15);
         return view('dashboard.post.index', compact(['posts']));
     }
 
@@ -40,6 +41,11 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $img_name = $request->file('image')->getClientOriginalName();
+        $new_img_name = time() . $img_name;
+
+
         $request->validate([
             'title' => 'required|max:120',
             'category' => 'required',
@@ -56,7 +62,10 @@ class DashboardPostController extends Controller
         $post->body = $request->body;
         $post->category_id = $request->category;
         $post->published_at = date('y-m-d');
-        $post->image = $request->file('image')->store('post-image');
+
+        $request->file('image')->move(public_path('images/post-images'), $new_img_name);
+        $post->image = $new_img_name;
+        // $post->image = $request->file('image')->store('post-image');
         $post->save();
 
         return redirect()->to('/dashboard/posts')->with('success', 'The post was uploaded!');
@@ -111,9 +120,13 @@ class DashboardPostController extends Controller
 
         if ($request->file('image')) {
             if ($request->oldimage) {
-                Storage::delete($request->oldimage);
+                // Storage::delete($request->oldimage);
+                File::delete('images/post-images/' . $request->oldimage);
             }
-            $post->image = $request->file('image')->store('post-image');
+            // $post->image = $request->file('image')->store('post-image');
+            $new_img_name = time() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images/post-images'), $new_img_name);
+            $post->image = $new_img_name;
         }
         $post->title = $request->title;
         $post->slug = $request->slug;
@@ -135,7 +148,8 @@ class DashboardPostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->image) {
-            Storage::delete($post->image);
+            File::delete('images/post-images/' . $post->image);
+            // Storage::delete($post->image);
         }
         Post::destroy($post->id);
         return redirect()->to('/dashboard/posts')->with('success', 'Post with title ' . $post->title . ' was deleted!');

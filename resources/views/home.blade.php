@@ -22,7 +22,9 @@
     @if($posts->count()>0)
     <div class="col-12 mr-1 mt-3 shadow-sm text-center">
         <div class="card">
-            <img src="..." class="card-img-top bg-secondary" alt="..." style="width:100%;height:140px">
+            <div class="w-100 overflow-hidden border-bottom" style="height: 50vh;">
+                <img src="{{ asset('images/post-images/'.$posts[0]->image) }}" class="card-img-top" alt="{{ $posts[0]->image }}">
+            </div>
             <div class="card-body"><small>
                     <p class="m-0">Writed by <a class="text-decoration-none" href="/post?writer={{ $posts[0]->user->name }}">{{ $posts[0]->user->name }}</a> in <a class="text-decoration-none" href="/post?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->category_name }}</a> {{ $posts[0]->created_at->diffForHumans() }} </p>
                 </small>
@@ -43,7 +45,7 @@
     @foreach($posts->skip(1) as $post)
     <div class="col-lg-4 mr-1 mt-3 shadow-sm">
         <div class="card">
-            <img src="..." class="card-img-top bg-secondary" alt="..." style="width:100%;height:140px">
+            <img src="{{ asset('images/post-images/'.$post->image) }}" class="card-img-top bg-secondary" alt="..." style="width:100%;height:140px">
             <div class="card-body"><small>
                     <p class="m-0">Writed by <a class="text-decoration-none" href="/writer/{{ $post->user->name }}">{{ $post->user->name }}</a> in <a class="text-decoration-none" href="/post?category={{ $post->category->slug }}">{{ $post->category->category_name }}</a> </p>
                 </small>

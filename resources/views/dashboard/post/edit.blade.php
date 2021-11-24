@@ -36,13 +36,12 @@
             </div>
             @enderror
         </div>
-
         <div class="form-group mb-3">
             <label class="form-label" for="image">Post Image</label>
             <input type="hidden" name="oldimage" value="{{$post->image}}">
             <div class="col-6">
                 @if($post->image)
-                <img src="{{asset('storage/'.$post->image)}}" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
+                <img src="{{asset('images/post-images/'.$post->image)}}" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
                 @else
                 <img src="" alt="" class="img-preview img-fluid mb-3" id="imgPreview">
                 @endif
